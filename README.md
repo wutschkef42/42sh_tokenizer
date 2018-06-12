@@ -10,20 +10,20 @@ done, so an ill-formated token like <<<<<< would pass. To fix this, we will chec
 operator tokens on format in a second pass.
 
 ## Usage
-Simply make and go ./alex "some command-line string"
+Simply make and go `./alex "some command-line string"`
 
 ## Example
 `./alex "find ~/Library/Logs/DiagnosticReports -mindepth 1 -delete > /dev/null||bla"`
 
-word token: find
-word token: ~/Library/Logs/DiagnosticReports
-word token: -mindepth
-word token: 1
-word token: -delete
-operator token: >
-word token: /dev/null
-operator token: ||
-last token: bla
+word token: find<br/>
+word token: ~/Library/Logs/DiagnosticReports<br/>
+word token: -mindepth<br/>
+word token: 1<br/>
+word token: -delete<br/>
+operator token: ><br/>
+word token: /dev/null<br/>
+operator token: ||<br/>
+last token: bla<br/>
 
 ## Next Steps
 The tokenizer must be expanded to handle inhibitors (', ", \\). The tokens must
