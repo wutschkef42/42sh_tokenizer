@@ -1,3 +1,5 @@
 
 *.o
 alex
+.DS_Store
+*._
