@@ -7,6 +7,20 @@
 # include <stdio.h>
 # include "libft.h"
 
+
+/* grammar symbols */
+
+# define LESS	"<"
+# define DLESS	"<<"
+# define GREAT	">"
+# define AND_IF	"&&"
+# define AND_OR	"||"
+# define SEMIC	";"
+# define SQUOT	'\''
+# define DQUOT	'\"'
+
+
+
 typedef enum {
 	STATE_find_tok,
 	STATE_read_op,
@@ -29,8 +43,8 @@ typedef enum {
 
 typedef enum {
 	TYPE_less,
+	TYPE_dless,
 	TYPE_great,
-	TYPE_dgreat,
 	TYPE_and_if,
 	TYPE_or_if,
 	TYPE_semic,
@@ -95,7 +109,10 @@ void		action_read_dquot_squot(t_fsm *fsm, t_list **tokens, int c);
 void		action_read_dquot_dquot(t_fsm *fsm, t_list **tokens, int c);
 
 void		add_char_to_current_tok(t_fsm *fsm, int c);
-void		print_list(t_list *lst);
+void		print_tokenstream(t_list *lst);
+
+int			process_tokens(t_list **tokens);
+
 
 #endif
 

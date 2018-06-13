@@ -13,7 +13,11 @@ int	main(int ac, char **av)
 	}
 	
 	tokens = run_state_machine(av[1]);
-	printf("---\n");
-	print_list(tokens);
+	printf("\n--- before processing\n\n");
+	print_tokenstream(tokens);
+	process_tokens(&tokens);
+	printf("\n--- after processing\n\n");
+	print_tokenstream(tokens);
+
 	return (1);
 }

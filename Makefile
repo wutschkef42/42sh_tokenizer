@@ -3,14 +3,16 @@
 NAME = alex
 
 SRC =	main.c \
-		fsm.c \
-		transitions/action_find_tok.c \
-		transitions/action_read_op.c \
-		transitions/action_read_word.c \
-		transitions/action_read_squot.c \
-		transitions/action_read_dquot.c \
-		transitions/action_utils.c \
-		util.c
+		lexer/fsm.c \
+		lexer/util.c \
+		lexer/process_tokens.c \
+		lexer/transitions/action_find_tok.c \
+		lexer/transitions/action_read_op.c \
+		lexer/transitions/action_read_word.c \
+		lexer/transitions/action_read_squot.c \
+		lexer/transitions/action_read_dquot.c \
+		lexer/transitions/action_utils.c
+		
 
 SRCDIR = ./src
 OBJDIR = ./obj
@@ -29,7 +31,7 @@ FLAGS = -Wall -Werror -Wextra -g
 all: obj $(FTLIB) $(NAME)
 
 obj:
-	mkdir -p $(OBJDIR)/transitions
+	mkdir -p $(OBJDIR)/lexer/transitions
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(FLAGS) $(FTINC) -I $(INCDIR) -I $(INCDIR_LFT) -o $@ -c $<
