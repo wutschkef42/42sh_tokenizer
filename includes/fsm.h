@@ -5,11 +5,14 @@
 # define TOK_BUF_SIZE 1024
 
 # include <stdio.h>
+# include "libft.h"
 
 typedef enum {
 	STATE_find_tok,
 	STATE_read_op,
 	STATE_read_word,
+	STATE_read_squot,
+	STATE_read_dquot,
 	MAX_STATES
 }				ParserState;
 
@@ -19,8 +22,24 @@ typedef enum {
 	EVENT_reg_char,
 	EVENT_op_char,
 	EVENT_semic,
+	EVENT_squot,
+	EVENT_dquot,
 	MAX_EVENTS
 }				EventType;
+
+typedef enum {
+	TYPE_less,
+	TYPE_great,
+	TYPE_dgreat,
+	TYPE_and_if,
+	TYPE_or_if,
+	TYPE_semic,
+	TYPE_op,
+	TYPE_word,
+	TYPE_squot,
+	TYPE_dquot,
+	MAX_TYPES
+}				TokType;
 
 typedef struct	s_fsm
 {
@@ -31,25 +50,52 @@ typedef struct	s_fsm
 	int			pos;
 }				t_fsm;
 
+typedef struct	s_tok
+{
+	TokType		type;
+	char		*id;
+}				t_tok;
+
 EventType	get_new_event(char c);
-int			run_state_machine(char *input);
+t_list		*run_state_machine(char *input);
 
-void		action_find_tok_whitespace(t_fsm *fsm, int c);
-void		action_find_tok_reg_char(t_fsm *fsm, int c);
-void		action_find_tok_op_char(t_fsm *fsm, int c);
-void		action_find_tok_semic(t_fsm *fsm, int c);
+void		action_find_tok_whitespace(t_fsm *fsm, t_list **tokens, int c);
+void		action_find_tok_reg_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_find_tok_op_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_find_tok_semic(t_fsm *fsm, t_list **tokens, int c);
+void		action_find_tok_squot(t_fsm *fsm, t_list **tokens, int c);
+void		action_find_tok_dquot(t_fsm *fsm, t_list **tokens, int c);
 
-void		action_read_op_whitespace(t_fsm *fsm, int c);
-void		action_read_op_reg_char(t_fsm *fsm, int c);
-void		action_read_op_op_char(t_fsm *fsm, int c);
-void		action_read_op_semic(t_fsm *fsm, int c);
+void		action_read_op_whitespace(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_op_reg_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_op_op_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_op_semic(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_op_squot(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_op_dquot(t_fsm *fsm, t_list **tokens, int c);
 
-void		action_read_word_whitespace(t_fsm *fsm, int c);
-void		action_read_word_reg_char(t_fsm *fsm, int c);
-void		action_read_word_op_char(t_fsm *fsm, int c);
-void		action_read_word_semic(t_fsm *fsm, int c);
+void		action_read_word_whitespace(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_word_reg_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_word_op_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_word_semic(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_word_squot(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_word_dquot(t_fsm *fsm, t_list **tokens, int c);
+
+void		action_read_squot_whitespace(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_squot_reg_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_squot_op_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_squot_semic(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_squot_squot(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_squot_dquot(t_fsm *fsm, t_list **tokens, int c);
+
+void		action_read_dquot_whitespace(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_dquot_reg_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_dquot_op_char(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_dquot_semic(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_dquot_squot(t_fsm *fsm, t_list **tokens, int c);
+void		action_read_dquot_dquot(t_fsm *fsm, t_list **tokens, int c);
 
 void		add_char_to_current_tok(t_fsm *fsm, int c);
+void		print_list(t_list *lst);
 
 #endif
 

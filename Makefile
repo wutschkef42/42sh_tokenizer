@@ -7,7 +7,10 @@ SRC =	main.c \
 		transitions/action_find_tok.c \
 		transitions/action_read_op.c \
 		transitions/action_read_word.c \
-		transitions/action_utils.c
+		transitions/action_read_squot.c \
+		transitions/action_read_dquot.c \
+		transitions/action_utils.c \
+		util.c
 
 SRCDIR = ./src
 OBJDIR = ./obj
