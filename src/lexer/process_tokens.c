@@ -36,7 +36,7 @@ int	process_tokens(t_list **tokens)
 		else if (((t_tok*)tok->data)->type == TYPE_word)
 		{
 			tok = tok->next;
-			continue;
+			continue ;
 		}
 		else
 		{

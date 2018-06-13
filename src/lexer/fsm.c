@@ -84,6 +84,7 @@ t_list	*run_state_machine(char *input)
 	t_list	*tokens;
 	int		c;
 	size_t	i;
+	t_tok	tok;
 
 	tokens = NULL;
 	init_state_machine(&fsm);
@@ -95,6 +96,9 @@ t_list	*run_state_machine(char *input)
 		state_table[fsm.parser_state][fsm.event_type](&fsm, &tokens, c);
 		i++;
 	}
-	printf("last token NOT IN LIST!: %s\n", fsm.current_tok);
+	// add last token remaining in fsm buffer
+	tok.type = (ft_strchr("<>|&", c)) ? TYPE_op : TYPE_word;
+	tok.id = ft_strdup(fsm.current_tok);
+	ft_lstpushback(&tokens, ft_lstnew((void*)&tok, sizeof(t_tok)));
 	return (tokens);
 }
