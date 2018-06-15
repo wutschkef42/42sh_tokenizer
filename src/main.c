@@ -38,7 +38,8 @@ int	main(int ac, char **av)
 	add_left_child(&(tree->op.left), make_node(tokens, AST_pipeline));
 	print_tree(tree);
 	*/
-
+	//printf("almost ok\n");
 	parse_list(&tokens, &root);
+	//printf("ok\n");
 	return (1);
 }

@@ -67,12 +67,12 @@ typedef enum {
 	TYPE_great,
 	TYPE_and_if,
 	TYPE_and_or,
-	TYPE_pipe,
 	TYPE_semic,
 	TYPE_op,
 	TYPE_word,
 	TYPE_squot,
 	TYPE_dquot,
+	TYPE_pipe,
 	MAX_TYPES
 }				TokType;
 
@@ -135,6 +135,9 @@ void		add_char_to_current_tok(t_fsm *fsm, int c);
 void		print_tokenstream(t_list *lst);
 
 int			process_tokens(t_list **tokens);
+
+
+
 
 
 #endif
