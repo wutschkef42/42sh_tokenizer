@@ -1,0 +1,56 @@
+
+
+
+grammar terminals 
+	
+	SEMIC
+	IF_AND
+	OR_AND
+	LESS
+	DLESS
+	PIPE
+	GREAT
+	WORD
+
+
+grammar non terminals
+
+AST_list
+AST_logic_op
+AST_and_if
+AST_and_or
+AST_pipeline
+AST_command
+
+
+list			::=		logic_op | 
+						logic_op SEMIC list
+
+logic_op		::=		pipeline |
+						pipeline AND_IF logic_op |
+						pipeline AND_OR logic_op
+
+
+pipeline		::=		command | 
+						command PIPE pipeline
+
+
+/*
+no need to consider flags as separate from word tokens 
+the first word in the simple command is the command name,
+all words after that beginning with '-' are flags
+all words after that not beginning with '-' are arguments
+*/
+
+command			::=		EMPTY |
+						WORD |
+						WORD command |
+						LESS WORD command |
+						DLESS WORD command |
+						GREAT WORD command
+
+
+
+
+
+

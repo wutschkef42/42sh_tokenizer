@@ -8,7 +8,28 @@
 # include "libft.h"
 
 
-/* grammar symbols */
+
+// TOKENIZER STUFF 
+
+/* operator precedence */
+
+//		;
+//		||
+//		&&
+//		
+
+/*
+	the idea is to build a syntax tree that groups the input stream into ; delimited commands.
+	each of those is further divided by logial operators
+	in between logical operators the command name is the leftest word, followed by its arguments
+	and with redirects sprinkled in between
+	once the tree has subtrees where each represents the command between two logical operators
+	its time to setup the redirects (one for output one for input), then call the command and its
+	arguments in a subshell or as a builtin.
+
+*/
+
+/* grammar tokens */
 
 # define LESS	"<"
 # define DLESS	"<<"
@@ -18,7 +39,6 @@
 # define SEMIC	";"
 # define SQUOT	'\''
 # define DQUOT	'\"'
-
 
 
 typedef enum {
@@ -46,7 +66,8 @@ typedef enum {
 	TYPE_dless,
 	TYPE_great,
 	TYPE_and_if,
-	TYPE_or_if,
+	TYPE_and_or,
+	TYPE_pipe,
 	TYPE_semic,
 	TYPE_op,
 	TYPE_word,
@@ -54,6 +75,8 @@ typedef enum {
 	TYPE_dquot,
 	MAX_TYPES
 }				TokType;
+
+
 
 typedef struct	s_fsm
 {

@@ -11,7 +11,10 @@ SRC =	main.c \
 		lexer/transitions/action_read_word.c \
 		lexer/transitions/action_read_squot.c \
 		lexer/transitions/action_read_dquot.c \
-		lexer/transitions/action_utils.c
+		lexer/transitions/action_utils.c \
+		btree/btree.c \
+		parser/parser.c \
+		parser/helper.c
 		
 
 SRCDIR = ./src
@@ -32,6 +35,8 @@ all: obj $(FTLIB) $(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)/lexer/transitions
+	mkdir -p $(OBJDIR)/btree
+	mkdir -p $(OBJDIR)/parser
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(FLAGS) $(FTINC) -I $(INCDIR) -I $(INCDIR_LFT) -o $@ -c $<
