@@ -14,19 +14,19 @@
 
 int	parse_list(t_list **tokens, t_ast_node **ast)
 {
-	if (!parse_logic_op(tokens, ast))
+	add_left_child(ast, make_node(NULL, AST_logic_op));
+	(*ast)->op.right = NULL;
+	if (!parse_logic_op(tokens, &(*ast)->op.left))
 		return (0);
 	if (!(*tokens))
 		return (1);
-	while (match((t_tok*)(*tokens)->data, TYPE_semic))
+	if (match((t_tok*)(*tokens)->data, TYPE_semic))
 	{	
 		next_token(tokens); // accept semicolon
 		add_right_child(ast, make_node(NULL, AST_list));
 		if (!parse_list(tokens, &((*ast)->op.right)))
 			return (0);
-	}
-	if (!((*tokens)->data))
-		return (1);
+	}	
 	return (0);
 }
 
@@ -41,12 +41,13 @@ int	parse_list(t_list **tokens, t_ast_node **ast)
 
 int	parse_logic_op(t_list **tokens, t_ast_node **ast)
 {
-	add_left_child(ast, make_node(NULL, AST_logic_op));
+	add_left_child(ast, make_node(NULL, AST_pipeline));
+	(*ast)->op.right = NULL;
 	if (!parse_pipeline(tokens, &(*ast)->op.left))
 		return (0);
 	if (!(*tokens))
 		return (1);
-	while (match((t_tok*)(*tokens)->data, TYPE_and_if) || match((t_tok*)(*tokens)->data, TYPE_and_or)) // match and skip && or || token
+	if (match((t_tok*)(*tokens)->data, TYPE_and_if) || match((t_tok*)(*tokens)->data, TYPE_and_or)) // match and skip && or || token
 	{
 		(*ast)->type = match((t_tok*)(*tokens)->data, TYPE_and_if) ? AST_and_if : AST_and_or;
 		next_token(tokens); // accept logical operator
@@ -70,18 +71,42 @@ int	parse_logic_op(t_list **tokens, t_ast_node **ast)
 
 int	parse_pipeline(t_list **tokens, t_ast_node **ast)
 {
-	add_left_child(ast, make_node(NULL, AST_pipeline));
+	add_left_child(ast, make_node(NULL, AST_command));
+	(*ast)->op.right = NULL;
 	if (!parse_command(tokens, &(*ast)->op.left))
 		return (0);
 	if (!(*tokens))
 		return (1);
-	while (match((t_tok*)(*tokens)->data, TYPE_pipe))
+	if (match((t_tok*)(*tokens)->data, TYPE_pipe))
 	{
 		next_token(tokens); // skip pipe
 		add_right_child(ast, make_node(NULL, AST_pipeline));
 		if (!parse_pipeline(tokens, &(*ast)->op.right))
 			return (0);
 	}
+	return (1);
+}
+
+/* grabs a consecutive set of tokens of type
+**
+** WORD, LESS, DLESS and GREAT
+** inserts the set of tokens into leave node of ast
+** doesnt recognise faulty redirects like $ ls >
+*/
+
+int	parse_command(t_list **tokens, t_ast_node **ast)
+{
+	t_list	*cmd_tokens;
+
+	if (!(cmd_tokens = (t_list*)malloc(sizeof(t_list))))
+		return (0);
+
+	// deep copy of command tokens, advanes token stream aswell
+	cmd_tokens = eat_command(tokens);
+	print_tokenstream(cmd_tokens);
+	
+	(*ast)->cmd = cmd_tokens;
+	// exit code, return of execve
 	return (1);
 }
 
@@ -106,8 +131,7 @@ t_list	*eat_command(t_list **tokens)
 {
 	t_list	*command;
 
-	if (!(command = (t_list*)malloc(sizeof(t_list))))
-		return (NULL);
+	command = NULL;
 	if (!(*tokens))
 		return (NULL);
 	while (*tokens)
@@ -123,28 +147,5 @@ t_list	*eat_command(t_list **tokens)
 		next_token(tokens);
 	}
 	return (command);
-}
-
-/* grabs a consecutive set of tokens of type
-**
-** WORD, LESS, DLESS and GREAT
-** inserts the set of tokens into leave node of ast
-** doesnt recognise faulty redirects like $ ls >
-*/
-
-int	parse_command(t_list **tokens, t_ast_node **ast)
-{
-	t_list	*cmd_tokens;
-
-	if (!(cmd_tokens = (t_list*)malloc(sizeof(t_list))))
-		return (0);
-
-	// deep copy of command tokens, advanes token stream aswell
-	cmd_tokens = eat_command(tokens);
-
-	
-	add_left_child(ast, make_node(cmd_tokens, AST_command));
-	// exit code, return of execve
-	return (1);
 }
 
