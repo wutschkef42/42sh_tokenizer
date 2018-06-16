@@ -36,6 +36,8 @@ t_ast_node	*make_node(t_list *cmd, AstType type)
 			return (NULL);
 		node->cmd = cmd;
 	}
+	node->op.left = NULL;
+	node->op.right = NULL;
 	return (node);
 }
 
@@ -43,7 +45,6 @@ void	print_tree(t_ast_node *tree)
 {
 	if (!tree)
 		return ;
-
 	printf("%u\n", tree->type);
 	if (tree->type != AST_command)
 	{

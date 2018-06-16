@@ -19,6 +19,8 @@ int	main(int ac, char **av)
 	root = (t_ast_node*)malloc(sizeof(t_ast_node));
 	root->type = AST_list;
 	root->cmd = NULL;
+	root->op.left = NULL;
+	root->op.right = NULL;
 	tokens = run_state_machine(av[1]);
 	printf("\n--- before processing\n\n");
 	print_tokenstream(tokens);
@@ -26,7 +28,6 @@ int	main(int ac, char **av)
 	printf("\n--- after processing\n\n");
 	print_tokenstream(tokens);
 
-	printf("test tree\n");
 
 	/*
 	t_ast_node	*tree;
@@ -40,6 +41,8 @@ int	main(int ac, char **av)
 	*/
 	//printf("almost ok\n");
 	parse_list(&tokens, &root);
+	print_level_order(root);
+	//print_tree(root);
 	//printf("ok\n");
 	return (1);
 }

@@ -48,5 +48,9 @@ void		add_right_child(t_ast_node **parent, t_ast_node *child);
 t_ast_node	*make_node(t_list *cmd, AstType type);
 void		print_tree(t_ast_node *tree);
 
+void		print_given_level(t_ast_node *root, int level);
+int			tree_height(t_ast_node *root);
+void		print_level_order(t_ast_node *root);
+
 #endif
 

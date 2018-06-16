@@ -20,13 +20,11 @@ t_tok	*next_token(t_list **tokens)
 	next->data = malloc((*tokens)->data_size);
 	ft_memcpy(next->data, (*tokens)->data, (*tokens)->data_size);
 	next->next = NULL;
-	printf("next_token()\n");
 	if (*tokens)
 	{
 		*tokens = (*tokens)->next;
 		return ((t_tok*)next->data);
 	}
-	printf("exit next_token()\n");
 	return (NULL);
 }
 
@@ -37,13 +35,8 @@ t_tok	*next_token(t_list **tokens)
 
 int	match(t_tok *current, TokType expected)
 {
-	printf("enter_match()\n");
 	if (!current || !(current->type))
-	{
-		printf("alert\n");
 		return (0);
-	}
-	printf("lala\n");
 	if (current->type == expected)
 		return (1);
 	return (0);

@@ -7,7 +7,7 @@
 void	print_tokenstream(t_list *lst)
 {
 	int	i;
-	char *	types[11] = { "LESS", "DLESS", "GREAT", "AND_IF", "AND_OR", "SEMIC", "OP", "WORD", "SQUOT", "DQUOT" };
+	char *	types[11] = { "LESS", "DLESS", "GREAT", "AND_IF", "AND_OR", "SEMIC", "OP", "WORD", "SQUOT", "DQUOT", "PIPE" };
 
 	if (!lst)
 		return ;

@@ -13,6 +13,7 @@ SRC =	main.c \
 		lexer/transitions/action_read_dquot.c \
 		lexer/transitions/action_utils.c \
 		btree/btree.c \
+		btree/print_btree.c \
 		parser/parser.c \
 		parser/helper.c
 		

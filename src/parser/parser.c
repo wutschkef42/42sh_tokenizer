@@ -14,7 +14,6 @@
 
 int	parse_list(t_list **tokens, t_ast_node **ast)
 {
-	printf("enter parse_list()\n");
 	if (!parse_logic_op(tokens, ast))
 		return (0);
 	if (!(*tokens))
@@ -42,7 +41,6 @@ int	parse_list(t_list **tokens, t_ast_node **ast)
 
 int	parse_logic_op(t_list **tokens, t_ast_node **ast)
 {
-	printf("enter parse_logic_op()\n");
 	add_left_child(ast, make_node(NULL, AST_logic_op));
 	if (!parse_pipeline(tokens, &(*ast)->op.left))
 		return (0);
@@ -72,7 +70,6 @@ int	parse_logic_op(t_list **tokens, t_ast_node **ast)
 
 int	parse_pipeline(t_list **tokens, t_ast_node **ast)
 {
-	printf("enter parse_pipeline()\n");
 	add_left_child(ast, make_node(NULL, AST_pipeline));
 	if (!parse_command(tokens, &(*ast)->op.left))
 		return (0);
@@ -94,10 +91,13 @@ int		is_command(t_list *token)
 	if (token->data)
 	{
 		if (((t_tok*)token->data)->type == TYPE_word)
-		{
-			printf("SUCCESS\n");
 			return (1);
-		}
+		else if (((t_tok*)token->data)->type == TYPE_less)
+			return (1);
+		else if (((t_tok*)token->data)->type == TYPE_dless)
+			return (1);
+		else if (((t_tok*)token->data)->type == TYPE_great)
+			return (1);
 	}
 	return (0);
 }
@@ -112,7 +112,6 @@ t_list	*eat_command(t_list **tokens)
 		return (NULL);
 	while (*tokens)
 	{
-		printf("eat\n");
 		if (is_command(*tokens))
 		{
 			ft_lstadd(&command, ft_lstnew((*tokens)->data, (*tokens)->data_size));
@@ -135,12 +134,12 @@ t_list	*eat_command(t_list **tokens)
 
 int	parse_command(t_list **tokens, t_ast_node **ast)
 {
-	printf("enter parse_command()\n");
 	t_list	*cmd_tokens;
 
 	if (!(cmd_tokens = (t_list*)malloc(sizeof(t_list))))
 		return (0);
 
+	// deep copy of command tokens, advanes token stream aswell
 	cmd_tokens = eat_command(tokens);
 
 	

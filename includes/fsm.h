@@ -34,6 +34,7 @@
 # define LESS	"<"
 # define DLESS	"<<"
 # define GREAT	">"
+# define PIPE	"|"
 # define AND_IF	"&&"
 # define AND_OR	"||"
 # define SEMIC	";"

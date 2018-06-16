@@ -29,6 +29,8 @@ int	process_tokens(t_list **tokens)
 			((t_tok*)tok->data)->type = TYPE_and_or;
 		else if (ft_strcmp(((t_tok*)tok->data)->id, SEMIC) == 0)
 			((t_tok*)tok->data)->type = TYPE_semic;
+		else if (ft_strcmp(((t_tok*)tok->data)->id, PIPE) == 0)
+			((t_tok*)tok->data)->type = TYPE_pipe;
 		else if ((((t_tok*)tok->data)->id)[0] == SQUOT)
 			((t_tok*)tok->data)->type = TYPE_squot;
 		else if ((((t_tok*)tok->data)->id)[0] == DQUOT)
