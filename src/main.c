@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	tokens = run_state_machine(av[1]);
 	//printf("\n--- before processing\n\n");
 	//print_tokenstream(tokens);
-//	process_tokens(&tokens);
+	process_tokens(&tokens);
 //	printf("\n--- after processing\n\n");
 //	print_tokenstream(tokens);
 
@@ -41,9 +41,9 @@ int	main(int ac, char **av)
 	*/
 	//printf("almost ok\n");
 	parse_list(&tokens, &root);
-	char ** args = get_leftmost_command(&root);
-	print_args(args);
-	//print_level_order(root);
+	//char ** args = get_leftmost_command(&root);
+//	print_args(args);
+	print_level_order(root);
 
 	//print_tree(root);
 	//printf("ok\n");
