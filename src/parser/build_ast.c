@@ -1,8 +1,7 @@
 
 #include "libft.h"
 #include "ast.h"
-#include "fsm.h"
-#include "btree.h"
+#include "lex.h"
 
 /* parses one ';' - delimited command per call
 **
@@ -111,41 +110,4 @@ int	parse_command(t_list **tokens, t_ast_node **ast)
 }
 
 
-int		is_command(t_list *token)
-{
-	if (token->data)
-	{
-		if (((t_tok*)token->data)->type == TYPE_word)
-			return (1);
-		else if (((t_tok*)token->data)->type == TYPE_less)
-			return (1);
-		else if (((t_tok*)token->data)->type == TYPE_dless)
-			return (1);
-		else if (((t_tok*)token->data)->type == TYPE_great)
-			return (1);
-	}
-	return (0);
-}
-
-t_list	*eat_command(t_list **tokens)
-{
-	t_list	*command;
-
-	command = NULL;
-	if (!(*tokens))
-		return (NULL);
-	while (*tokens)
-	{
-		if (is_command(*tokens))
-		{
-			ft_lstadd(&command, ft_lstnew((*tokens)->data, (*tokens)->data_size));
-		}
-		else
-		{
-			break ;
-		}
-		next_token(tokens);
-	}
-	return (command);
-}
 

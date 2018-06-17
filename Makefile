@@ -12,9 +12,9 @@ SRC =	main.c \
 		lexer/transitions/action_read_squot.c \
 		lexer/transitions/action_read_dquot.c \
 		lexer/transitions/action_utils.c \
-		btree/btree.c \
-		btree/print_btree.c \
-		parser/parser.c \
+		parser/binary_tree.c \
+		parser/print_ast.c \
+		parser/build_ast.c \
 		parser/helper.c
 		
 

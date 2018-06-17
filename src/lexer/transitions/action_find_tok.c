@@ -1,6 +1,6 @@
 
 
-#include "fsm.h"
+#include "lex.h"
 
 void	action_find_tok_whitespace(t_fsm *fsm, t_list **tokens, int c)
 {

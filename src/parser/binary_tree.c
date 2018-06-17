@@ -1,6 +1,6 @@
 
 
-#include "btree.h"
+#include "ast.h"
 #include "libft.h"
 
 void	add_left_child(t_ast_node **parent, t_ast_node *child)
@@ -41,14 +41,3 @@ t_ast_node	*make_node(t_list *cmd, AstType type)
 	return (node);
 }
 
-void	print_tree(t_ast_node *tree)
-{
-	if (!tree)
-		return ;
-	printf("%u\n", tree->type);
-	if (tree->type != AST_command)
-	{
-		print_tree(tree->op.left);
-		print_tree(tree->op.right);
-	}
-}

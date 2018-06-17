@@ -1,7 +1,7 @@
 
 
 #include <stdio.h>
-#include "fsm.h"
+#include "lex.h"
 #include "libft.h"
 
 void	print_tokenstream(t_list *lst)

@@ -1,6 +1,6 @@
 
 
-#include "fsm.h"
+#include "lex.h"
 
 void	add_char_to_current_tok(t_fsm *fsm, int c)
 {
