@@ -15,7 +15,8 @@ SRC =	main.c \
 		parser/binary_tree.c \
 		parser/print_ast.c \
 		parser/build_ast.c \
-		parser/helper.c
+		parser/helper.c \
+		interpreter/evaluate_ast.c
 		
 
 SRCDIR = ./src
@@ -37,6 +38,7 @@ all: obj $(FTLIB) $(NAME)
 obj:
 	mkdir -p $(OBJDIR)/lexer/transitions
 	mkdir -p $(OBJDIR)/parser
+	mkdir -p $(OBJDIR)/interpreter
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(FLAGS) $(FTINC) -I $(INCDIR) -I $(INCDIR_LFT) -o $@ -c $<

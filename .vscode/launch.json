@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/alex",
-			"args": ["word1 | word2 && word3 && word4;word5"],
+			"args": ["cmd arg1 arg2 arg3"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
