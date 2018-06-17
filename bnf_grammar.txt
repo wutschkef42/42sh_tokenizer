@@ -1,8 +1,10 @@
 
 
 
-grammar terminals 
-	
+/*
+** grammar terminal symbols
+*/
+
 	SEMIC
 	IF_AND
 	OR_AND
@@ -13,41 +15,41 @@ grammar terminals
 	WORD
 
 
-grammar non terminals
 
-AST_list
-AST_logic_op
-AST_and_if
-AST_and_or
-AST_pipeline
-AST_command
+/*
+** grammar non terminal symbols
+*/
 
-
-list			::=		logic_op | 
-						logic_op SEMIC list
-
-logic_op		::=		pipeline |
-						pipeline AND_IF logic_op |
-						pipeline AND_OR logic_op
-
-
-pipeline		::=		command | 
-						command PIPE pipeline
+	AST_list
+	AST_logic_op
+	AST_and_if
+	AST_and_or
+	AST_pipeline
+	AST_command
 
 
 /*
-no need to consider flags as separate from word tokens 
-the first word in the simple command is the command name,
-all words after that beginning with '-' are flags
-all words after that not beginning with '-' are arguments
+** grammar derivations
 */
 
-command			::=		EMPTY |
-						WORD |
-						WORD command |
-						LESS WORD command |
-						DLESS WORD command |
-						GREAT WORD command
+AST_list			::=		AST_logic_op 						| 
+							AST_logic_op SEMIC AST_list
+
+AST_logic_op		::=		AST_pipeline 						|
+							AST_pipeline AND_IF AST_logic_op 	|
+							AST_pipeline AND_OR AST_logic_op
+
+
+AST_pipeline		::=		AST_command 						| 
+							AST_command PIPE AST_pipeline
+
+
+AST_command			::=		EMPTY 								|
+							WORD 								|
+							WORD command 						|
+							LESS WORD command 					|
+							DLESS WORD command 					|
+							GREAT WORD command
 
 
 

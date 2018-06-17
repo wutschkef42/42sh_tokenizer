@@ -36,7 +36,6 @@ all: obj $(FTLIB) $(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)/lexer/transitions
-	mkdir -p $(OBJDIR)/btree
 	mkdir -p $(OBJDIR)/parser
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
