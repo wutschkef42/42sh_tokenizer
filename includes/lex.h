@@ -143,6 +143,15 @@ int			process_tokens(t_list **tokens);
 char		*read_line(void);
 
 
+/* getter_setter_token.c */
+
+TokType		get_token_type(t_list *tok);
+char		*get_token_id(t_list *tok);
+void		set_token_type(t_list *tok, TokType type);
+
+
+
+
 
 
 

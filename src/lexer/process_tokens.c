@@ -4,23 +4,6 @@
 #include "libft.h"
 
 
-static
-char	*get_token_id(t_list *tok)
-{
-	return (((t_tok*)tok->data)->id);
-}
-
-static
-void	set_token_type(t_list *tok, TokType type)
-{
-	((t_tok*)tok->data)->type = type;
-}
-
-static
-TokType	get_token_type(t_list *tok)
-{
-	return (((t_tok*)tok->data)->type);
-}
 
 
 /* consumes raw token stream and

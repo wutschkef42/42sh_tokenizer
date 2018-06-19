@@ -37,26 +37,6 @@ to get to the commands
 
 
 
-/*
-** extract token type from list node container
-*/
-
-static
-TokType	get_token_type(t_list *node)
-{
-	return (((t_tok*)(node->data))->type);
-}
-
-
-/*
-** extract token value from list container
-*/
-
-static
-char	*get_command_value(t_list *node)
-{
-	return (((t_tok*)(node->data))->id);
-}
 
 /*
 ** count number of TYPE_word tokens in command list
@@ -99,13 +79,6 @@ void	print_args(char **args)
 }
 
 
-
-AstType	get_ast_node_type(t_ast_node *node)
-{
-	return (node->type);
-}
-
-
 /*
 ** traverse AST and evaluate it
 ** for now, stupidly go left until it hits a command node
@@ -123,9 +96,6 @@ char	**get_leftmost_command(t_ast_node **root)
 }
 
 
-
-
-
 /*
 ** find the worst TYPE_word token in command list
 ** and return its value
@@ -139,38 +109,11 @@ char	*get_cname(t_list *command)
 	while (command)
 	{
 		if (get_token_type(command) == TYPE_word)
-			return (get_command_value(command));
+			return (get_token_id(command));
 		command = command->next;
 	}
 	return (NULL);
 }
-
-
-
-
-
-/*
-** count number of tokens in list
-
-
-static
-int		count_tokens(t_list *command)
-{
-	int	n;
-
-	if (!command)
-		return (0);
-	n = 0;
-	while (command)
-	{
-		n++;
-		command = command->next;
-	}
-	return (n);
-}
-
-*/
-
 
 
 
@@ -196,7 +139,7 @@ char	**get_args(t_list *command)
 	while (i < count_args(command))
 	{
 		command_count = count_args(command);
-		if (!(args[i] = ft_strnew(ft_strlen(get_command_value(command)))))
+		if (!(args[i] = ft_strnew(ft_strlen(get_token_id(command)))))
 			return (NULL);
 		i++;
 	}
@@ -205,7 +148,7 @@ char	**get_args(t_list *command)
 	while (command)
 	{
 		if (get_token_type(command) == TYPE_word)
-			ft_strcpy(args[i], get_command_value(command));
+			ft_strcpy(args[i], get_token_id(command));
 		command = command->next;
 		i++;
 	}

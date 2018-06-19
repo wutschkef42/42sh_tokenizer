@@ -3,6 +3,8 @@
 #include "ast.h"
 #include "libft.h"
 
+
+
 void	add_left_child(t_ast_node **parent, t_ast_node *child)
 {
 	if (!*parent)
@@ -13,6 +15,7 @@ void	add_left_child(t_ast_node **parent, t_ast_node *child)
 	(*parent)->op.left = child;
 }
 
+
 void	add_right_child(t_ast_node **parent, t_ast_node *child)
 {
 	if (!*parent)
@@ -22,6 +25,7 @@ void	add_right_child(t_ast_node **parent, t_ast_node *child)
 	}
 	(*parent)->op.right = child;
 }
+
 
 t_ast_node	*make_node(t_list *cmd, AstType type)
 {

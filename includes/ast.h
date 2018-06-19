@@ -66,4 +66,6 @@ t_tok		*next_token(t_list **tokens);
 t_list		*eat_command(t_list **tokens);
 int			is_command(t_list *token);
 
+AstType		get_ast_node_type(t_ast_node *node);
+
 #endif
