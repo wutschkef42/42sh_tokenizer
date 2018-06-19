@@ -3,6 +3,7 @@
 NAME = alex
 
 SRC =	main.c \
+		memory_stuff.c \
 		lexer/read_input.c \
 		lexer/getter_setter_token.c \
 		lexer/fsm.c \

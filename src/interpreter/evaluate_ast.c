@@ -141,6 +141,7 @@ char	**get_args(t_list *command)
 		command_count = count_args(command);
 		if (!(args[i] = ft_strnew(ft_strlen(get_token_id(command)))))
 			return (NULL);
+			
 		i++;
 	}
 	i = 0;

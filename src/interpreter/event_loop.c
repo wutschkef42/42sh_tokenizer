@@ -1,6 +1,8 @@
 
 #include "lex.h"
 #include "ast.h"
+#include "eval.h"
+#include "misc.h"
 
 void	event_loop(void)
 {
@@ -8,6 +10,7 @@ void	event_loop(void)
 	t_list		*tokens;
 	t_ast_node	*ast;
 	int			status;
+	//char		**cmd;
 
 	status = 1;
 	while (status)
@@ -18,7 +21,12 @@ void	event_loop(void)
 		tokens = run_state_machine(line);
 		process_tokens(&tokens);
 		parse_list(&tokens, &ast);
-		print_level_order(ast);
+		//print_level_order(ast);
+		//cmd = get_leftmost_command(&ast);
+		//print_args(cmd);
+		
 		free(line);
+		free_ast(ast);
+		//free_tab(cmd);
 	}
 }

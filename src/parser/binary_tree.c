@@ -5,7 +5,7 @@
 
 
 
-void	add_left_child(t_ast_node **parent, t_ast_node *child)
+void		add_left_child(t_ast_node **parent, t_ast_node *child)
 {
 	if (!*parent)
 	{
@@ -16,7 +16,7 @@ void	add_left_child(t_ast_node **parent, t_ast_node *child)
 }
 
 
-void	add_right_child(t_ast_node **parent, t_ast_node *child)
+void		add_right_child(t_ast_node **parent, t_ast_node *child)
 {
 	if (!*parent)
 	{
