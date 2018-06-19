@@ -3,6 +3,7 @@
 NAME = alex
 
 SRC =	main.c \
+		lexer/read_input.c \
 		lexer/fsm.c \
 		lexer/util.c \
 		lexer/process_tokens.c \
@@ -16,7 +17,8 @@ SRC =	main.c \
 		parser/print_ast.c \
 		parser/build_ast.c \
 		parser/helper.c \
-		interpreter/evaluate_ast.c
+		interpreter/evaluate_ast.c \
+		interpreter/event_loop.c
 		
 
 SRCDIR = ./src

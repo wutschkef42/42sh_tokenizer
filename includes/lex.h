@@ -138,6 +138,14 @@ void		print_tokenstream(t_list *lst);
 int			process_tokens(t_list **tokens);
 
 
+/* read_input.c */
+
+char		*read_line(void);
+
+
+
+
+
 
 
 

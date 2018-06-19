@@ -11,4 +11,6 @@ char	*get_cname(t_list *command);
 char	**get_args(t_list *command);
 void	print_args(char **args);
 
+void	event_loop(void);
+
 #endif
