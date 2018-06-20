@@ -3,6 +3,8 @@
 #include "ast.h"
 #include "lex.h"
 
+
+
 /* parses one ';' - delimited command per call
 **
 ** inserts semicolons into ast
@@ -86,6 +88,8 @@ int	parse_pipeline(t_list **tokens, t_ast_node **ast)
 	return (1);
 }
 
+
+
 /* grabs a consecutive set of tokens of type
 **
 ** WORD, LESS, DLESS and GREAT
@@ -102,7 +106,10 @@ int	parse_command(t_list **tokens, t_ast_node **ast)
 
 	// deep copy of command tokens, advanes token stream aswell
 	cmd_tokens = eat_command(tokens);
+
 	(*ast)->cmd = cmd_tokens;
+	//(*ast)->op.left = NULL;
+	//(*ast)->op.right = NULL;
 	// exit code, return of execve
 	return (1);
 }

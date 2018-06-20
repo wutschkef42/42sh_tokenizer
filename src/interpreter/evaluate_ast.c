@@ -91,8 +91,13 @@ char	**get_leftmost_command(t_ast_node **root)
 	if (!root)
 		return (NULL);
 	while (get_ast_node_type(*root) != AST_command)
+	{
+
+		printf("tokentype: %u\n", (*root)->type);
 		*root = (*root)->op.left;
-	return(get_args((*root)->cmd));
+	}
+	print_tokenstream((*root)->cmd);
+	return (get_args((*root)->cmd));
 }
 
 

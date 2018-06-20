@@ -38,8 +38,8 @@ t_ast_node	*make_node(t_list *cmd, AstType type)
 	{
 		if (!(node->cmd = (t_list*)malloc(sizeof(t_list))))
 			return (NULL);
-		node->cmd = cmd;
 	}
+	node->cmd = cmd;
 	node->op.left = NULL;
 	node->op.right = NULL;
 	return (node);
