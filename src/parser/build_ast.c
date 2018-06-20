@@ -106,7 +106,7 @@ int	parse_command(t_list **tokens, t_ast_node **ast)
 
 	// deep copy of command tokens, advanes token stream aswell
 	cmd_tokens = eat_command(tokens);
-
+	print_tokenstream(cmd_tokens);
 	(*ast)->cmd = cmd_tokens;
 	//(*ast)->op.left = NULL;
 	//(*ast)->op.right = NULL;

@@ -61,8 +61,11 @@ void		print_given_level(t_ast_node *root, int level)
 		print_node(root);
 	else if (level > 1)
 	{
-		print_given_level(root->op.left, level - 1);
-		print_given_level(root->op.right, level - 1);
+		if (root->type != AST_command)
+		{
+			print_given_level(root->op.left, level - 1);
+			print_given_level(root->op.right, level - 1);
+		}
 	}
 }
 

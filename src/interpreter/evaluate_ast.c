@@ -101,6 +101,19 @@ char	**get_leftmost_command(t_ast_node **root)
 }
 
 
+char	**get_lcommand(t_ast_node *ast)
+{
+	if (!ast)
+		return (NULL);
+	while (get_ast_node_type(ast) != AST_command)
+	{
+		printf("toktype: %u\n", ast->type);
+		ast = ast->op.left;
+	}
+	print_tokenstream(ast->cmd);
+	return (get_args(ast->cmd));
+}
+
 /*
 ** find the worst TYPE_word token in command list
 ** and return its value

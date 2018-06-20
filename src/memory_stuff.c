@@ -27,8 +27,12 @@ void	free_ast(t_ast_node *ast)
 	
 	if (!ast)
 		return ;
-	free_ast(ast->op.left);
-	free_ast(ast->op.right);
+	if (!ast->cmd)
+	{
+		free_ast(ast->op.left);
+		free_ast(ast->op.right);
+	}
+	
 	if (ast->type == AST_command)
 		free(ast->cmd);
 	free(ast);
