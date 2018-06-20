@@ -4,10 +4,16 @@
 #include "ast.h"
 #include "eval.h"
 #include "misc.h"
+#include "hashmap.h"
 
-int	main()
+int	main(int ac, char **av, char **env)
 {
-	event_loop();
+	t_hashmap	*hm_env;
+
+	(void)ac;
+	(void)av;
+	load_env(&hm_env, env);
+	event_loop(hm_env);
 
 	return (1);
 }

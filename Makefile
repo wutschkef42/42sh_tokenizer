@@ -4,6 +4,7 @@ NAME = alex
 
 SRC =	main.c \
 		memory_stuff.c \
+		misc.c \
 		lexer/read_input.c \
 		lexer/getter_setter_token.c \
 		lexer/fsm.c \
@@ -21,7 +22,15 @@ SRC =	main.c \
 		parser/getter_setter_ast.c \
 		parser/helper.c \
 		interpreter/evaluate_ast.c \
-		interpreter/event_loop.c
+		interpreter/event_loop.c \
+		interpreter/env.c \
+		interpreter/launch_executable.c \
+		interpreter/link_executable.c \
+		data_structures/hashmap.c \
+		data_structures/hashmap_2.c \
+		data_structures/hashmap_insert.c \
+		data_structures/serialize.c \
+		data_structures/doubly_linked_list.c
 		
 
 SRCDIR = ./src
@@ -44,6 +53,7 @@ obj:
 	mkdir -p $(OBJDIR)/lexer/transitions
 	mkdir -p $(OBJDIR)/parser
 	mkdir -p $(OBJDIR)/interpreter
+	mkdir -p $(OBJDIR)/data_structures
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(FLAGS) $(FTINC) -I $(INCDIR) -I $(INCDIR_LFT) -o $@ -c $<

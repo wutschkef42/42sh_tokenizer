@@ -2,7 +2,8 @@
 
 #include <stdlib.h>
 #include "ast.h"
-
+#include "doubly_linked_list.h"
+#include "hashmap.h"
 
 void	free_tab(char **tab)
 {
@@ -36,4 +37,41 @@ void	free_ast(t_ast_node *ast)
 	if (ast->type == AST_command)
 		free(ast->cmd);
 	free(ast);
+}
+
+
+
+void	dll_delete_head(t_dll_node **head)
+{
+	t_dll_node	*node;
+
+	if (!head)
+		return ;
+	if (!(*head))
+		return ;
+	node = *head;
+	*head = node->next;
+	free(node->data);
+	node->data = NULL;
+	free(node);
+	node->prev = NULL;
+	node->next = NULL;
+}
+
+void	dll_delete_list(t_dll_node **head)
+{
+	if (!head || !(*head))
+		return ;
+	while (*head)
+	{
+		dll_delete_head(head);
+		*head = (*head)->next;
+	}
+}
+
+void	hm_free_entry(t_hm_entry *entry)
+{
+	free(entry->key->data);
+	free(entry->key);
+	free(entry);
 }

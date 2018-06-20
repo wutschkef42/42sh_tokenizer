@@ -83,13 +83,9 @@ t_list	*eat_command(t_list **tokens)
 	while (*tokens)
 	{
 		if (is_command(*tokens))
-		{
 			ft_lstadd(&command, ft_lstnew((*tokens)->data, (*tokens)->data_size));
-		}
 		else
-		{
 			break ;
-		}
 		next_token(tokens);
 	}
 	return (command);

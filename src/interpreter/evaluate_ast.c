@@ -86,31 +86,12 @@ void	print_args(char **args)
 ** then pass to execve() for execution
 */
 
-char	**get_leftmost_command(t_ast_node **root)
-{
-	if (!root)
-		return (NULL);
-	while (get_ast_node_type(*root) != AST_command)
-	{
-
-		printf("tokentype: %u\n", (*root)->type);
-		*root = (*root)->op.left;
-	}
-	print_tokenstream((*root)->cmd);
-	return (get_args((*root)->cmd));
-}
-
-
-char	**get_lcommand(t_ast_node *ast)
+char	**get_leftmost_command(t_ast_node *ast)
 {
 	if (!ast)
 		return (NULL);
 	while (get_ast_node_type(ast) != AST_command)
-	{
-		printf("toktype: %u\n", ast->type);
 		ast = ast->op.left;
-	}
-	print_tokenstream(ast->cmd);
 	return (get_args(ast->cmd));
 }
 

@@ -23,8 +23,6 @@ void		print_level_order(t_ast_node *root)
 }
 
 
-
-
 /* prints string formatted representation of AST node */
 
 void		print_node(t_ast_node *node)
@@ -42,14 +40,9 @@ void		print_node(t_ast_node *node)
 	else if (node->type == AST_pipeline)
 		printf("{ AST_pipeline } ");
 	else if (node->type == AST_command)
-	{
 		printf("{ AST_command } ");
-		print_tokenstream(node->cmd);
-	}
-	
-	printf("done\n");	
-
 }
+
 
 /* print all nodes at a given level */
 
@@ -85,7 +78,6 @@ int			tree_height(t_ast_node *root)
 		lheight = tree_height(root->op.left);
 	if (root->type != AST_command)	
 		rheight = tree_height(root->op.right);
-
 	if (lheight > rheight)
 		return (lheight + 1);
 	else

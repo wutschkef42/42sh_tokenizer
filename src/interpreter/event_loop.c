@@ -3,8 +3,9 @@
 #include "ast.h"
 #include "eval.h"
 #include "misc.h"
+#include "hashmap.h"
 
-void	event_loop(void)
+void	event_loop(t_hashmap *env)
 {
 	char		*line;
 	t_list		*tokens;
@@ -15,6 +16,7 @@ void	event_loop(void)
 	status = 1;
 	while (status)
 	{
+		(void)env;
 		ast = make_node(NULL, AST_list);
 		ft_printf("$> ");
 		line = read_line();
@@ -22,10 +24,11 @@ void	event_loop(void)
 		process_tokens(&tokens);
 		parse_list(&tokens, &ast);
 		//print_level_order(ast);
-		cmd = get_leftmost_command(&ast);
-		print_args(cmd);
+		cmd = get_leftmost_command(ast);
+		//print_args(cmd);
+		launch_executable(cmd, env);
 		free(line);
 		free_ast(ast);
-	//	free_tab(cmd);
+		free_tab(cmd);
 	}
 }
