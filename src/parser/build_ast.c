@@ -108,8 +108,8 @@ int	parse_command(t_list **tokens, t_ast_node **ast)
 	(void)cmd_tokens;
 	(void)ast;
 	(void)tokens;
-	//cmd_tokens = eat_command(tokens);
-	//(*ast)->cmd = cmd_tokens;
+	cmd_tokens = eat_command(tokens);
+	(*ast)->cmd = cmd_tokens;
 	// exit code, return of execve
 	return (1);
 }

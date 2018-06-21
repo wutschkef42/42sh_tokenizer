@@ -14,6 +14,7 @@ int	main(int ac, char **av, char **env)
 	char		**cmd;
 	t_hashmap	*hm_env;
 
+	hm_env = malloc(sizeof(t_hashmap));
 	load_env(&hm_env, env);
 	(void)ac;
 	(void)env;

@@ -4,6 +4,7 @@
 #include "ast.h"
 #include "doubly_linked_list.h"
 #include "hashmap.h"
+#include "misc.h"
 
 
 void	free_tab(char **tab)
@@ -16,7 +17,6 @@ void	free_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		tab[i] = NULL;
 		free(tab[i]);
 		i++;
 	}
@@ -36,7 +36,7 @@ void	free_ast(t_ast_node *ast)
 	}
 	
 	if (ast->type == AST_command)
-		free(ast->cmd);
+		free_list(ast->cmd);
 	free(ast);
 }
 
@@ -50,7 +50,8 @@ void	free_list(t_list *lst)
 	while (lst)
 	{
 		node = lst;
-		free(((t_tok*)lst->data)->id);
+		// DANGER
+		//free(((t_tok*)lst->data)->id);
 		free(lst->data);
 		lst = lst->next;
 		free(node);

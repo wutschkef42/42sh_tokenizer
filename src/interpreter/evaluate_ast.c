@@ -54,8 +54,8 @@ int		count_args(t_list *command)
 	n = 0;
 	while (command)
 	{
-		if (get_token_type(command) == TYPE_word)
-			n++;
+		//if (get_token_type(command) == TYPE_word)
+		n++;
 		command = command->next;
 	}
 	return (n);
