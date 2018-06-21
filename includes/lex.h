@@ -135,7 +135,7 @@ void		action_read_dquot_dquot(t_fsm *fsm, t_list **tokens, int c);
 void		add_char_to_current_tok(t_fsm *fsm, int c);
 void		print_tokenstream(t_list *lst);
 
-int			process_tokens(t_list **tokens);
+int			process_tokens(t_list *tokens);
 
 
 /* read_input.c */

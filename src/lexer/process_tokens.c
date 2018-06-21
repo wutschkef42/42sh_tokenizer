@@ -4,20 +4,16 @@
 #include "libft.h"
 
 
-
-
 /* consumes raw token stream and
 ** adds precise token_type to each token
 ** returns 0 on succesful parse
 ** returns 1 on parse error
 */
-int		process_tokens(t_list **tokens)
-{
-	t_list	*tok;
 
-	if (!tokens)
+int		process_tokens(t_list *tok)
+{
+	if (!tok)
 		return (1);
-	tok = *tokens;
 	while (tok)
 	{
 		if (ft_strcmp(get_token_id(tok), LESS) == 0)

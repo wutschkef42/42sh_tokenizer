@@ -9,6 +9,7 @@ void	event_loop(t_hashmap *env)
 {
 	char		*line;
 	t_list		*tokens;
+	t_list		*tokens_cpy;
 	t_ast_node	*ast;
 	int			status;
 	char		**cmd;
@@ -21,13 +22,15 @@ void	event_loop(t_hashmap *env)
 		ft_printf("$> ");
 		line = read_line();
 		tokens = run_state_machine(line);
-		process_tokens(&tokens);
+		tokens_cpy = tokens;
+		process_tokens(tokens);
 		parse_list(&tokens, &ast);
 		//print_level_order(ast);
 		cmd = get_leftmost_command(ast);
 		//print_args(cmd);
 		launch_executable(cmd, env);
 		free(line);
+		free_list(tokens_cpy);
 		free_ast(ast);
 		free_tab(cmd);
 	}

@@ -5,6 +5,7 @@
 #include "doubly_linked_list.h"
 #include "hashmap.h"
 
+
 void	free_tab(char **tab)
 {
 	int	i;
@@ -40,6 +41,20 @@ void	free_ast(t_ast_node *ast)
 }
 
 
+void	free_list(t_list *lst)
+{
+	t_list	*node;
+
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		node = lst;
+		free(lst->data);
+		lst = lst->next;
+		free(node);
+	}
+}
 
 void	dll_delete_head(t_dll_node **head)
 {

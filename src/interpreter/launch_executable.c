@@ -2,7 +2,7 @@
 #include "hashmap.h"
 #include "libft.h"
 #include "eval.h"
-
+#include "misc.h"
 
 int launch_executable(char **args, t_hashmap *env)
 {

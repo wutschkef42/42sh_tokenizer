@@ -125,23 +125,23 @@ char	**get_args(t_list *command)
 {
 	char	**args;
 	int		i;
-	int		command_count;
+	int		tok_count;
 	t_list	*cp;
 
-	cp = command;
-	command_count = 0;
 	if (!command)
 		return (NULL);
+	cp = command;
 	if (!(args = (char**)malloc(sizeof(*args) * count_args(command) + 1)))
 		return (NULL);
 	i = 0;
-	while (i < count_args(command))
+	tok_count = count_args(command);
+	while (i < tok_count)
 	{
-		command_count = count_args(command);
 		if (!(args[i] = ft_strnew(ft_strlen(get_token_id(command)))))
-			return (NULL);
-			
+			return (NULL);		
 		i++;
+		if (command)
+			command = command->next;
 	}
 	i = 0;
 	command = cp;
