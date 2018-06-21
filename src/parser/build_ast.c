@@ -105,8 +105,11 @@ int	parse_command(t_list **tokens, t_ast_node **ast)
 //	if (!(cmd_tokens = (t_list*)malloc(sizeof(t_list))))
 //		return (0);
 
-	cmd_tokens = eat_command(tokens);
-	(*ast)->cmd = cmd_tokens;
+	(void)cmd_tokens;
+	(void)ast;
+	(void)tokens;
+	//cmd_tokens = eat_command(tokens);
+	//(*ast)->cmd = cmd_tokens;
 	// exit code, return of execve
 	return (1);
 }

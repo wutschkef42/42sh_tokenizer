@@ -8,6 +8,7 @@
 
 int	main(int ac, char **av, char **env)
 {
+/*
 	t_list		*tokens;
 	t_ast_node	*ast;
 	char		**cmd;
@@ -26,14 +27,14 @@ int	main(int ac, char **av, char **env)
 	launch_executable(cmd, hm_env);
 	free_ast(ast);
 	free_tab(cmd);
-
-/*	t_hashmap	*hm_env;
+*/
+	t_hashmap	*hm_env;
 
 	(void)ac;
 	(void)av;
 	load_env(&hm_env, env);
 	event_loop(hm_env);
-*/
+
 
 
 	return (1);

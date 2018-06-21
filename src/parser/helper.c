@@ -20,7 +20,7 @@ void	next_token(t_list **tokens)
 ** checks if type of current token fits into grammar 
 */
 
-int	match(t_tok *current, TokType expected)
+int		match(t_tok *current, TokType expected)
 {
 	if (!current || !(current->type))
 		return (0);

@@ -26,10 +26,10 @@ void	free_tab(char **tab)
 
 void	free_ast(t_ast_node *ast)
 {
-	
+	printf("free ast\n");
 	if (!ast)
 		return ;
-	if (!ast->cmd)
+	if (!(ast->type == AST_command))
 	{
 		free_ast(ast->op.left);
 		free_ast(ast->op.right);
@@ -50,6 +50,7 @@ void	free_list(t_list *lst)
 	while (lst)
 	{
 		node = lst;
+		free(((t_tok*)lst->data)->id);
 		free(lst->data);
 		lst = lst->next;
 		free(node);
