@@ -100,6 +100,5 @@ t_list	*run_state_machine(char *input)
 	tok.type = (ft_strchr("<>|&", c)) ? TYPE_op : TYPE_word;
 	tok.id = ft_strdup(fsm.current_tok);
 	ft_lstpushback(&tokens, ft_lstnew((void*)&tok, sizeof(t_tok)));
-	//free(tok.id);
 	return (tokens);
 }

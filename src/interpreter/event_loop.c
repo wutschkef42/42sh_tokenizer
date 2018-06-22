@@ -25,7 +25,6 @@ void	event_loop(t_hashmap *env)
 		tokens_cpy = tokens;
 		process_tokens(tokens);
 		parse_list(&tokens, &ast);
-		print_level_order(ast);
 		cmd = get_leftmost_command(ast);
 		print_args(cmd);
 		launch_executable(cmd, env);

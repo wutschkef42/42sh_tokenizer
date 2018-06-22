@@ -23,10 +23,34 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
+/*
+** does not free token->id,
+** frees only list container
+** necessary because eat_command makes a deep
+** copy of part of the token list 
+** the token list is freed including token->id fields
+** so when freeing the output of eat_command
+** freeing token->id causes a double free
+*/
+
+void	free_list_shallow(t_list *lst)
+{
+	t_list	*node;
+
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		node = lst;
+		free(lst->data);
+		lst = lst->next;
+		free(node);
+	}
+}
+
 
 void	free_ast(t_ast_node *ast)
 {
-	printf("free ast\n");
 	if (!ast)
 		return ;
 	if (!(ast->type == AST_command))
@@ -36,10 +60,16 @@ void	free_ast(t_ast_node *ast)
 	}
 	
 	if (ast->type == AST_command)
-		free_list(ast->cmd);
+		free_list_shallow(ast->cmd);
 	free(ast);
 }
 
+
+/* should be called free_tokens
+** because it not only frees the list itself
+** but also heap allocated memory pointers to which
+** reside inside of the list nodes data portion
+*/
 
 void	free_list(t_list *lst)
 {
@@ -50,8 +80,7 @@ void	free_list(t_list *lst)
 	while (lst)
 	{
 		node = lst;
-		// DANGER
-		//free(((t_tok*)lst->data)->id);
+		free(((t_tok*)lst->data)->id);
 		free(lst->data);
 		lst = lst->next;
 		free(node);
