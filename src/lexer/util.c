@@ -21,3 +21,18 @@ void	print_tokenstream(t_list *lst)
 		i++;
 	}
 }
+
+void	print_tokenstream_short(t_list *lst)
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		if (lst->next)
+			printf("%s, ", ((t_tok*)lst->data)->id);
+		else
+			printf("%s", ((t_tok*)lst->data)->id);
+		lst = lst->next;
+	}
+	printf("\n");
+}

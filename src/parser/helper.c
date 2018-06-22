@@ -1,5 +1,6 @@
 
 
+#include "memager.h" 
 #include "lex.h"
 
 /*
@@ -62,6 +63,7 @@ int		is_command(t_list *token)
 t_list	*eat_command(t_list **tokens)
 {
 	t_list	*command;
+	t_list	*new;
 
 	command = NULL;
 	if (!(*tokens))
@@ -69,7 +71,12 @@ t_list	*eat_command(t_list **tokens)
 	while (*tokens)
 	{
 		if (is_command(*tokens))
-			ft_lstadd(&command, ft_lstnew((*tokens)->data, (*tokens)->data_size));
+		{
+			new = ft_lstnew((*tokens)->data, (*tokens)->data_size);
+			ft_lstadd(&command, new);
+			mgr_add_ref(mgr_get_category(AST), (void*)new, sizeof(t_tok));
+		}
+			
 		else
 			break ;
 		next_token(tokens);

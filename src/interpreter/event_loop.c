@@ -4,6 +4,7 @@
 #include "eval.h"
 #include "misc.h"
 #include "hashmap.h"
+#include "memager.h"
 
 void	event_loop(t_hashmap *env)
 {
@@ -13,10 +14,12 @@ void	event_loop(t_hashmap *env)
 	t_ast_node	*ast;
 	int			status;
 	char		**cmd;
+	
 
 	status = 1;
 	while (status)
 	{
+		mgr_init(); // initialize memory manager (set head of categories list to NULL)
 		(void)env;
 		ast = make_node(NULL, AST_list);
 		ft_printf("$> ");
@@ -26,11 +29,13 @@ void	event_loop(t_hashmap *env)
 		process_tokens(tokens);
 		parse_list(&tokens, &ast);
 		cmd = get_leftmost_command(ast);
-		print_args(cmd);
+		//print_args(cmd);
 		launch_executable(cmd, env);
+		//mgr_print_category(mgr_get_category(AST));
+		mgr_del_category(mgr_get_category(AST));
 		free(line);
 		free_list(tokens_cpy);
-		free_ast(ast);
+		//free_ast(ast);
 		free_tab(cmd);
 	}
 }

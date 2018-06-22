@@ -14,6 +14,8 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+
+	
 	load_env(&hm_env, env);
 	event_loop(hm_env);
 
@@ -22,8 +24,8 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 	
-	t_mem_cat	**categories = mgr_get_all();
-	*categories = NULL;
+	
+	
 
 	mgr_get_category("yolo");
 	mgr_get_category("waifu");

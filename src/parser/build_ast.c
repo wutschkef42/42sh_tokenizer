@@ -2,7 +2,7 @@
 #include "libft.h"
 #include "ast.h"
 #include "lex.h"
-
+#include "memager.h"
 
 
 /* parses one ';' - delimited command per call
@@ -27,7 +27,7 @@ int	parse_list(t_list **tokens, t_ast_node **ast)
 		add_right_child(ast, make_node(NULL, AST_list));
 		if (!parse_list(tokens, &((*ast)->op.right)))
 			return (0);
-	}	
+	}
 	return (0);
 }
 

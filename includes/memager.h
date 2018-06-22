@@ -29,6 +29,8 @@
 #ifndef MEMAGER_H
 # define MEMAGER_H
 # define CATEGORY_LABEL_MAXLEN 40
+# define AST "AST"
+# define TOKEN "TOKEN"
 # include <stdlib.h>
 # include "libft.h"
 # include <stdio.h>
@@ -68,6 +70,7 @@ typedef struct			s_mem_ref
 ** memory category functions
 */
 
+void		mgr_init(void);
 t_mem_cat	**mgr_get_all(void); // returns head of list of categories
 t_mem_cat	*mgr_get_category(const char *label);
 void		mgr_del_category(t_mem_cat *category);
@@ -81,6 +84,7 @@ void		mgr_print_categories(t_mem_cat *categories);
 ** memory reference functions
 */
 
+void		*mgr_alloc(t_mem_cat *category, size_t size);
 t_mem_ref	*mgr_add_ref(t_mem_cat *category, void *ptr, size_t size);
 void		mgr_del_ref(t_mem_ref *ref);
 void		mgr_print_category(t_mem_cat *category);

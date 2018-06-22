@@ -4,6 +4,16 @@
 #include "memager.h"
 #include <stdio.h>
 
+
+void		mgr_init(void)
+{
+	t_mem_cat	**categories;
+
+	categories = mgr_get_all();
+	*categories = NULL;
+}
+
+
 t_mem_cat	**mgr_get_all(void)
 {
 	static	t_mem_cat	*categories;
@@ -43,6 +53,9 @@ t_mem_cat	*mgr_get_category(const char *label)
 	{
 		if (!(*categories = (t_mem_cat*)malloc(sizeof(t_mem_cat))))
 			return (NULL);
+		(*categories)->start = NULL;
+		(*categories)->end = NULL;
+		(*categories)->ptr_count = 0;
 		ft_strncpy((*categories)->label, label, CATEGORY_LABEL_MAXLEN);
 	}
 	return (*categories);
