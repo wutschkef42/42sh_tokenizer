@@ -30,7 +30,9 @@ SRC =	main.c \
 		data_structures/hashmap_2.c \
 		data_structures/hashmap_insert.c \
 		data_structures/serialize.c \
-		data_structures/doubly_linked_list.c
+		data_structures/doubly_linked_list.c \
+		memory_manager/category_functions.c \
+		memory_manager/mem_ref_functions.c
 		
 
 SRCDIR = ./src
@@ -54,6 +56,7 @@ obj:
 	mkdir -p $(OBJDIR)/parser
 	mkdir -p $(OBJDIR)/interpreter
 	mkdir -p $(OBJDIR)/data_structures
+	mkdir -p $(OBJDIR)/memory_manager
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(FLAGS) $(FTINC) -I $(INCDIR) -I $(INCDIR_LFT) -o $@ -c $<

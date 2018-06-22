@@ -1,9 +1,5 @@
 
 
-// GOAL: store all 42sh allocations in categories and free the categories on every REPL loop
-// current issue is that eat_command makes a copy of some tokens, the tokens contain 
-
-
 /*
 ** MEMAGER (MEMory menAGER)
 **
@@ -13,6 +9,19 @@
 ** in user defined categories.
 ** the idea is to choose categories such that all members can be 
 ** freed simultaneously.
+
+** memory categories are chained together in a singly linked list with a pointer
+** at the front and one at the end.
+** each category itself is a singly linked list and a pointer to the category 
+** a point to the head of the categories list is stored as a static variable 
+** inside mgr_get_all();
+** mgr_get_category() returns the requested category if it exists and creates it if it doesnt.
+** mgr_del_category() iterates over list of memory references and frees the reference and the node
+** itself.
+** mgr_dell_all() deletes all categories
+** mgr_check_category() returns true if a given category exists
+** mgr_add_ref() adds a reference to a given category
+** mgr_del_ref() deletes a reference 
 **
 */
 
@@ -21,7 +30,8 @@
 # define MEMAGER_H
 # define CATEGORY_LABEL_MAXLEN 40
 # include <stdlib.h>
-
+# include "libft.h"
+# include <stdio.h>
 
 /*
 ** memory category node
@@ -47,7 +57,7 @@ typedef struct			s_mem_cat
 
 typedef struct			s_mem_ref
 {
-	struct s_mem_cat	*parent;
+	struct s_mem_cat	*category;
 	void				*ptr;
 	size_t				size;
 	struct s_mem_ref	*next;
@@ -60,9 +70,11 @@ typedef struct			s_mem_ref
 
 t_mem_cat	**mgr_get_all(void); // returns head of list of categories
 t_mem_cat	*mgr_get_category(const char *label);
-int			mgr_del_category(t_mem_cat *category);
-int			mgr_del_all(void); // uses mgr_get_all_categories to get head of category list, then frees it all
+void		mgr_del_category(t_mem_cat *category);
+void		mgr_del_all(void); // uses mgr_get_all_categories to get head of category list, then frees it all
 int			mgr_check_category(const char *label); // check if category exists
+size_t		mgr_count_categories(t_mem_cat *categories);
+void		mgr_print_categories(t_mem_cat *categories);
 
 
 /*
@@ -71,8 +83,7 @@ int			mgr_check_category(const char *label); // check if category exists
 
 t_mem_ref	*mgr_add_ref(t_mem_cat *category, void *ptr, size_t size);
 void		mgr_del_ref(t_mem_ref *ref);
-
-
+void		mgr_print_category(t_mem_cat *category);
 
 
 #endif
