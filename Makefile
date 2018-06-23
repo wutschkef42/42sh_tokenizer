@@ -22,6 +22,7 @@ SRC =	main.c \
 		parser/getter_setter_ast.c \
 		parser/helper.c \
 		interpreter/evaluate_ast.c \
+		interpreter/setup_redirects.c \
 		interpreter/event_loop.c \
 		interpreter/env.c \
 		interpreter/launch_executable.c \

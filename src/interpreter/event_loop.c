@@ -14,7 +14,7 @@ void	event_loop(t_hashmap *env)
 	t_ast_node	*ast;
 	int			status;
 	char		**cmd;
-	
+	t_list		**cmd_tokens;
 
 	status = 1;
 	while (status)
@@ -28,8 +28,12 @@ void	event_loop(t_hashmap *env)
 		tokens_cpy = tokens;
 		process_tokens(tokens);
 		parse_list(&tokens, &ast);
-		cmd = get_leftmost_command(ast);
-		print_args(cmd);
+		cmd_tokens = get_leftmost_command_tokens(ast);
+		//print_tokenstream(*cmd_tokens);
+		setup_redirects(cmd_tokens);
+		cmd = get_args(*cmd_tokens);
+		//cmd = get_leftmost_command(ast);
+		//print_args(cmd);
 		launch_executable(cmd, env);
 		//mgr_print_category(mgr_get_category(AST));
 		mgr_del_category(mgr_get_category(AST));

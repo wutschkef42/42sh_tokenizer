@@ -95,6 +95,15 @@ char	**get_leftmost_command(t_ast_node *ast)
 	return (get_args(ast->cmd));
 }
 
+t_list	**get_leftmost_command_tokens(t_ast_node *ast)
+{
+	if (!ast)
+		return (NULL);
+	while (get_ast_node_type(ast) != AST_command)
+		ast = ast->op.left;
+	return (&ast->cmd);
+}
+
 /*
 ** find the worst TYPE_word token in command list
 ** and return its value

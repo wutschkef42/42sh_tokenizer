@@ -1,6 +1,10 @@
 {
 	"C_Cpp.errorSquiggles": "Disabled",
 	"files.associations": {
-		"libft.h": "c"
+		"libft.h": "c",
+		"hashmap.h": "c",
+		"ast.h": "c",
+		"__locale": "c",
+		"ios": "c"
 	}
 }
