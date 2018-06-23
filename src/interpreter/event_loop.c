@@ -29,7 +29,7 @@ void	event_loop(t_hashmap *env)
 		process_tokens(tokens);
 		parse_list(&tokens, &ast);
 		cmd = get_leftmost_command(ast);
-		//print_args(cmd);
+		print_args(cmd);
 		launch_executable(cmd, env);
 		//mgr_print_category(mgr_get_category(AST));
 		mgr_del_category(mgr_get_category(AST));

@@ -56,6 +56,7 @@ void	(*const state_table [MAX_STATES][MAX_EVENTS])(t_fsm *fsm, t_list **tokens, 
 static
 void	init_state_machine(t_fsm *fsm)
 {
+	ft_bzero(fsm->current_tok, TOK_BUF_SIZE);
 	fsm->current_tok_len = 0;
 	fsm->parser_state = STATE_find_tok;
 	fsm->pos = 0;
@@ -77,6 +78,7 @@ EventType	get_new_event(char c)
 	else
 		return (EVENT_reg_char);
 }
+
 
 t_list	*run_state_machine(char *input)
 {

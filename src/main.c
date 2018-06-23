@@ -15,7 +15,6 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 
-	
 	load_env(&hm_env, env);
 	event_loop(hm_env);
 

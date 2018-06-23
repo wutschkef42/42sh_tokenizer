@@ -115,7 +115,6 @@ char	*get_cname(t_list *command)
 }
 
 
-
 /*
 ** consume token list making up a command 
 ** return argument array to be passed to execve

@@ -33,8 +33,6 @@ t_ast_node	*make_node(t_list *cmd, AstType type)
 
 	if (!(node = (t_ast_node*)mgr_alloc(mgr_get_category(AST), sizeof(t_ast_node))))
 		return (NULL);
-	//if (!(node = (t_ast_node*)malloc(sizeof(t_ast_node))))
-	//	return (NULL);
 	node->type = type;
 	if (type == AST_command)
 		node->cmd = cmd;
