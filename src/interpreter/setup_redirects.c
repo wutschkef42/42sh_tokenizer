@@ -37,13 +37,13 @@ int     setup_redirects(t_list **cmd)
     t_list  *filename;
     t_list  *redir;
     int     fd;
-    int     stdout_ref;
+    //int     stdout_ref;
 
     if (!cmd || !get_redirect(*cmd))
         return (0);
     while ((redir = get_redirect(*cmd)))
     {
-        stdout_ref = dup(1);
+     //   stdout_ref = dup(1);
         if (!(filename = redir->next))
             return (0);
         if (!(((t_tok*)(filename->data))->type == TYPE_word))
@@ -56,7 +56,7 @@ int     setup_redirects(t_list **cmd)
         else
         {
             fd = open(get_token_id(filename), O_WRONLY | O_CREAT, 777);
-            dup2(fd, stdout_ref);
+            dup2(fd, 1);
         }
         delete_token(cmd, redir);
         delete_token(cmd, filename);
